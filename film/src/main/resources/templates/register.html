@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{admin/fragments/head :: head}"></head>
+<link type="text/css" rel="stylesheet" th:href="@{/assets/css/user.css}" />
+<link type="text/css" rel="stylesheet" th:href="@{/assets/css/auth.css}" />
+<link href='https://fonts.googleapis.com/css?family=Wendy One' rel='stylesheet'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+<div th:replace="user/fragments/header-guest :: header-guest"></div>
+
+<body
+    th:style="'background-image:url(' + @{/assets/images/bg.png} + '); background-repeat: no-repeat, repeat; background-size: cover;'"
+    style="background-image:url('assets/images/bg.png'); background-repeat: no-repeat, repeat; background-size: cover;">
+    <div class="register-content">
+        <div class="login-form">
+            <p>Register</p>
+
+            <!-- Form đăng ký -->
+            <form id="registerForm" method="POST">
+                <input type="text" placeholder="Username" name="username">
+                <input type="text" placeholder="Email" name="email">
+                <div style="position: relative;">
+                    <input type="password" id="password-input" placeholder="Password" name="password" style="padding-right: 30px; color: black">
+                    <i class="fas fa-eye-slash" id="password-toggle" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer;color: black;"></i>
+                </div>
+                <div style="position: relative;">
+                    <input type="password" id="confirm-password-input" placeholder="Confirm Password" name="confirmPassword" style="padding-right: 30px; color: black">
+                    <i class="fas fa-eye-slash" id="confirm-password-toggle" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer;color: black;"></i>
+                </div>
+                <label class="accept-terms">
+                    <span style="display: flex; align-items: center;  font-family: 'Wendy One', sans-serif; font-size: 18px; white-space: nowrap;">
+                        <input type="checkbox" id="accept-checkbox" style="display: flex; align-items: center; margin-top: 10px;margin-right: 10px;"> I accept <span style="color: red;">MovieHolic</span>'s term
+                    </span>
+                </label>
+                <span id="error-message" th:text="${errorMessage}" style="display: flex; align-items: center; font-family: 'Wendy One', sans-serif; font-size: 16px; white-space: nowrap; color: red"></span>
+                <button type="button" id="register-button" class="register-button">Register</button>
+                <p style="margin-top: 10px; font-family: 'Wendy One', sans-serif; font-size: 18px;">Already have an account? <a th:href="@{/login}" style="color: red; text-decoration: none;">Log In</a></p>
+            </form>
+
+            <!-- Form nhập OTP -->
+            <div id="otpForm" style="display:none;">
+                <div class="input-field">
+                    <input type="text" maxlength="1" disabled>
+                    <input type="text" maxlength="1" disabled>
+                    <input type="text" maxlength="1" disabled>
+                    <input type="text" maxlength="1" disabled>
+                    <input type="text" maxlength="1" disabled>
+                    <input type="text" maxlength="1" disabled>
+                </div>
+                <button class="forget-button" id="verifyOtpButton" disabled>Verify OTP</button>
+                <p id="otpErrorMessage" style="margin-top: 20px;display:none; color: red; font-family: 'Wendy One', sans-serif; font-size: 20px;"></p>
+            </div>
+            
+            <!-- Thông báo gửi OTP thành công -->
+            <div id="otpSentMessage" style="display:none; color: red; font-family: 'Wendy One', sans-serif; font-size: 20px;">OTP has been sent to your email.</div>
+            
+            <!-- Thông báo đăng ký thành công -->
+            <div id="registrationSuccessMessage" style="display:none; color: red; font-family: 'Wendy One', sans-serif; font-size: 20px;">Registration successful!</div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        function togglePasswordVisibility(inputId, toggleId) {
+            var input = document.querySelector('#' + inputId);
+            var toggle = document.querySelector('#' + toggleId);
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                toggle.classList.remove('fa-eye-slash');
+                toggle.classList.add('fa-eye');
+            } else {
+                input.type = 'password';
+                toggle.classList.remove('fa-eye');
+                toggle.classList.add('fa-eye-slash');
+            }
+        }
+
+        // Add event listeners for password visibility toggles
+        var passwordToggle = document.querySelector('#password-toggle');
+        passwordToggle.addEventListener('click', function () {
+            togglePasswordVisibility('password-input', 'password-toggle');
+        });
+
+        var confirmPasswordToggle = document.querySelector('#confirm-password-toggle');
+        confirmPasswordToggle.addEventListener('click', function () {
+            togglePasswordVisibility('confirm-password-input', 'confirm-password-toggle');
+        });
+
+        document.getElementById("register-button").addEventListener("click", async function (event) {
+            var username = document.querySelector("input[name='username']").value;
+            var email = document.querySelector("input[name='email']").value;
+            var password = document.getElementById("password-input").value;
+            var confirmPassword = document.getElementById("confirm-password-input").value;
+            var acceptCheckbox = document.getElementById("accept-checkbox");
+            var errorMessage = document.getElementById("error-message");
+
+            if (username === '' || email === '' || password === '' || confirmPassword === '') {
+                errorMessage.textContent = "All fields are required.";
+                errorMessage.style.display = "block";
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                errorMessage.textContent = "Passwords do not match.";
+                errorMessage.style.display = "block";
+                return;
+            }
+
+            if (!acceptCheckbox.checked) {
+                errorMessage.textContent = "You must accept the terms.";
+                errorMessage.style.display = "block";
+                return;
+            }
+
+            try {
+                let response = await fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        username: username,
+                        email: email,
+                        password: password
+                    })
+                });
+
+                let result = await response.json();
+
+                if (result.success) {
+                    document.getElementById('registerForm').style.display = 'none';
+                    document.getElementById('otpForm').style.display = 'block';
+                    document.getElementById('otpSentMessage').style.display = 'block';
+                    enableOTPInputsAndButton();
+                } else {
+                    errorMessage.textContent = result.message;
+                    errorMessage.style.display = "block";
+                }
+            } catch (error) {
+                errorMessage.textContent = "An error occurred. Please try again.";
+                errorMessage.style.display = "block";
+            }
+        });
+
+        function enableOTPInputsAndButton() {
+            var otpInputs = document.querySelectorAll('.input-field input');
+            var verifyOtpButton = document.getElementById('verifyOtpButton');
+
+            otpInputs.forEach((input, index) => {
+                input.disabled = false;
+                input.addEventListener('input', function () {
+                    if (input.value.length === 1) {
+                        if (index < otpInputs.length - 1) {
+                            otpInputs[index + 1].focus();
+                        } else {
+                            verifyOtpButton.disabled = false;
+                        }
+                    }
+                });
+            });
+
+            otpInputs[0].focus();
+        }
+
+        document.getElementById('verifyOtpButton').addEventListener('click', async function (event) {
+            var otpInputs = document.querySelectorAll('.input-field input');
+            var otp = Array.from(otpInputs).map(input => input.value).join('');
+            var otpErrorMessage = document.getElementById('otpErrorMessage');
+            var otpSentMessage = document.getElementById('otpSentMessage');
+
+            try {
+                let response = await fetch('/verify-otp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        otp: otp
+                    })
+                });
+
+                let result = await response.json();
+
+                if (result.success) {
+                                        document.getElementById('otpForm').style.display = 'none';
+                    document.getElementById('registrationSuccessMessage').style.display = 'block';
+                    otpSentMessage.style.display = 'none'; // Ẩn thông báo OTP đã được gửi
+                    setTimeout(function() {
+                        window.location.href = '/login';
+                    }, 3000); // Chuyển hướng sau 3 giây
+                } else {
+                    otpErrorMessage.textContent = result.message;
+                    otpErrorMessage.style.display = 'block';
+                }
+            } catch (error) {
+                otpErrorMessage.textContent = 'An error occurred. Please try again.';
+                otpErrorMessage.style.display = 'block';
+            }
+        });
+
+    </script>
+    <style>
+        .input-field {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .input-field input {
+            width: 40px;
+            height: 40px;
+            margin-right: 5px;
+            text-align: center;
+            font-size: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</body>
+
+</html>

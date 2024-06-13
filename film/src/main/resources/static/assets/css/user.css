@@ -1,0 +1,177 @@
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: black;
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	color: white;
+}
+
+.logo {
+	margin-right: 10px;
+}
+
+.logo img {
+	width: 120px;
+	/* Chỉnh kích thước ảnh logo */
+	height: 40px;
+}
+
+.search-box {
+	display: flex;
+	align-items: center;
+	background-color: #595959;
+	border-radius: 20px;
+	padding: 5px 10px;
+	margin-right: 10px;
+}
+
+.search-box input[type="text"] {
+	background-color: #595959;
+	border: none;
+	outline: none;
+	padding: 5px;
+}
+
+.search-box input::placeholder {
+	color: rgb(172, 172, 172);
+	font-family: "Wendy One", sans-serif
+}
+
+.nav-items {
+	float: left;
+	margin-right: 30px;
+}
+
+.nav-items a {
+	color: white;
+	margin-right: 20px;
+	text-decoration: none;
+	font-family: "Wendy One", sans-serif;
+	font-size: 18px;
+}
+
+.login-button {
+	background-color: #FF3131;
+	color: white;
+	padding: 8px 15px;
+	border: none;
+	border-radius: 3px;
+	font-family: "Wendy One", sans-serif;
+	font-size: 18px;
+	margin-left: 480px;
+}
+
+.start-button {
+	background-color: #FF3131;
+	color: white;
+	padding: 8px 15px;
+	border: none;
+	border-radius: 3px;
+	font-family: "Wendy One", sans-serif;
+	font-size: 18px;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background-color: #212121;
+	overflow: hidden;
+}
+
+.content {
+	text-align: center;
+	color: white;
+}
+
+.login-content {
+	width: 352px;
+	height: 350px;
+	background-color: #868686;
+	opacity: 0.8;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.login-form {
+	color: white;
+	text-align: center;
+	transform: translateY(40px);
+}
+
+.login-form p {
+	margin-top: -100px;
+	font-family: "Wendy One", sans-serif;
+	font-size: 50px;
+}
+
+.login-form input {
+	display: block;
+	width: 100%;
+	margin-bottom: 10px;
+	padding: 5px;
+	font-family: "Wendy One", sans-serif;
+	font-size: 18px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	color: black;
+}
+
+.register-content {
+  width: 400px;
+  height: 420px;
+  background-color: #868686;
+  opacity: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-form {
+  color: white;
+  text-align: center;
+  transform: translateY(40px);
+}
+
+.register-form p {
+  margin-top: -100px;
+  font-family: "Wendy One", sans-serif;
+  font-size: 50px;
+}
+
+.register-button {
+  display: block;
+  background-color: #FF3131;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  font-family: 'Wendy One', sans-serif;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.register-form p:last-child {
+  margin-top: 10px;
+  font-family: 'Wendy One', sans-serif;
+  font-size: 18px;
+}
+.forget-button{
+	display: block;
+	background-color: #FF3131;
+	color: white;
+	padding: 8px 15px;
+	border: none;
+	width: 100%;
+	border-radius: 3px;
+	font-family: 'Wendy One', sans-serif;
+	font-size: 18px;
+	margin-top: 10px;
+}

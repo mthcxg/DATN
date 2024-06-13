@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{admin/fragments/head :: head}"></head>
+<link type="text/css" rel="stylesheet" th:href="@{/assets/css/user.css}" />
+<link type="text/css" rel="stylesheet" th:href="@{/assets/css/auth.css}" />
+<link href='https://fonts.googleapis.com/css?family=Wendy One' rel='stylesheet'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+<div th:replace="user/fragments/header-guest :: header-guest"></div>
+<style>
+	.card {
+		border: none;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		height: 100%;
+		background-color: rgb(30, 30, 30);
+	}
+
+	.card-body {
+		padding: 1rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.fs-13 {
+		font-size: 13px;
+	}
+
+	.filter-container {
+		background-color: rgb(30, 30, 30);
+		padding: 10px;
+		border: 5px;
+		margin-top: 20px;
+		display: flex;
+		align-items: center;
+	}
+
+	.pagination {
+		margin-left: 20px;
+		text-align: right;
+		display: inline-block;
+	}
+
+	.pagination a {
+		color: black;
+		float: left;
+		padding: 8px 16px;
+		text-decoration: none;
+	}
+
+	.pagination li {
+		margin-right: 5px;
+	}
+
+	.pagination .current-page {
+		background-color: white;
+	}
+</style>
+
+<body style="background-color: #212121;">
+
+
+	<div class="content-container">
+		<h1 style="font-family: 'Wendy One', sans-serif;color: #ffffff; font-size: 50px;">Movie List</h1>
+		<hr>
+		<div class="filter-container">
+			<div class="pagination"> <a th:href="@{/search(category=${categoryId}, keyword=${keyword}, page=1)}"
+					style="color: white;">&laquo;</a> <a
+					th:each="pageNumber : ${#numbers.sequence((currentPage > 2 ? currentPage - 2 : 1),(currentPage + 2 > totalPages ? totalPages : currentPage + 2))}"
+					th:href="@{/search(category=${categoryId}, keyword=${keyword}, page=${pageNumber})}"
+					th:classappend="${pageNumber == currentPage} ? 'current-page' : ''"
+					th:style="${pageNumber == currentPage} ? 'color: black;' : 'color: white;'"
+					th:text="${pageNumber}"></a> <a th:if="${currentPage < totalPages}"
+					th:href="@{/search(category=${categoryId}, keyword=${keyword}, page=${totalPages})}"
+					style="color: white;" th:text="${totalPages}"></a> <a th:if="${currentPage < totalPages}"
+					th:href="@{/search(category=${categoryId}, keyword=${keyword}, page=${totalPages})}"
+					style="color: white;">&raquo;</a>
+			</div>
+		</div>
+
+		<hr>
+
+
+		<hr>
+
+		<div class="row">
+			<div class="col-md-3 mb-4" th:each="p : ${movies}">
+				<div class="card h-100">
+					<div class="card-body d-flex flex-column justify-content-center align-items-center">
+						<a th:href="@{/{movie_id}(movie_id=${p.id})}">
+							<img th:src="${p.image}" class="img-fluid mb-3" alt="movie Image" />
+						</a>
+						<span class="text-center card-title justify-content-center fs-13"
+							style="font-family: 'Wendy One', sans-serif;font-size: 20px;font-weight: bold;color: #FF3131"
+							th:onclick="'window.location.href=\'' + @{/{movie_id}(movie_id=${p.id})} + '\''">[(${p.name})]</span><br>
+						<span style="font-weight: bold;font-size: 20px;">Rating: <span
+								style="font-family: 'Wendy One', sans-serif;color: #FF3131">[(${p.rate})] </span>
+							<span style="font-size: medium;">([(${p.num_rate})] peoples)</span></span><br>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="pagination">
+			<a th:href="@{/search(category=${categoryId}, keyword=${keyword}, page=1)}"
+				style="color: white;">&laquo;</a>
+			<a th:each="pageNumber : ${#numbers.sequence((currentPage > 2 ? currentPage - 2 : 1),(currentPage + 2 > totalPages ? totalPages : currentPage + 2))}"
+				th:href="@{/search(category=${categoryId}, keyword=${keyword}, page=${pageNumber})}"
+				th:classappend="${pageNumber == currentPage} ? 'current-page' : ''"
+				th:style="${pageNumber == currentPage} ? 'color: black;' : 'color: white;'" th:text="${pageNumber}"></a>
+			<a th:if="${currentPage < totalPages}"
+				th:href="@{/search(category=${categoryId}, keyword=${keyword}, page=${totalPages})}"
+				style="color: white;">&raquo;</a>
+		</div>
+	</div>
+
+</body>
+
+</html>

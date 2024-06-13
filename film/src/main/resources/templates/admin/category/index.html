@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="admin/fragments/head :: head"></head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+
+        <div th:replace="admin/fragments/header :: header"></div>
+
+        <!-- =============================================== -->
+
+        <!-- Left side column. contains the sidebar -->
+        <div th:replace="admin/fragments/sidebar :: sidebar"></div>
+        
+        <!-- =============================================== -->
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    Category Management
+                    <small>All your categories</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li class="active">Category List</li>
+                </ol>
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Category List</h3>
+                            <a id="newCategoryButton" class="btn btn-success" href="javascript:void(0)">New</a>
+                        </div>
+                        <div id="addCategoryForm" class="collapse" style="margin-left: 20px;">
+                                <form th:action="@{/admin/category/add}" th:object="${newCategory}" method="post">
+                                    <div class="form-group">
+                                        <label for="categoryName">Name</label>
+                                        <input type="text" class="form-control" id="categoryName" th:field="*{name}" placeholder="Enter category name" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Add Category</button>
+                                </form>
+                            </div>
+                        <div class="box-body">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Actions</th> <!-- Add actions column -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="category : ${categoryPage.content}">
+                                        <td th:text="${category.id}"></td>
+                                        <td th:text="${category.name}"></td>
+                                        <td>
+                                            <form th:action="@{/admin/category/delete/{id}(id=${category.id})}" method="post">
+                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <!-- Pagination -->
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <div class="dataTables_info" role="status" aria-live="polite">
+                                        <p th:text="'Showing ' + ${categoryPage.number} + ' to ' + ${categoryPage.size} + ' of ' + ${categoryPage.totalElements} + ' entries'"></p>
+                                 </div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="dataTables_paginate paging_simple_numbers">
+                                        <ul class="pagination">
+                                            <li class="paginate_button previous" th:classappend="${categoryPage.hasPrevious() ? '' : 'disabled'}">
+                                                <a th:href="@{/admin/category(size=${categoryPage.size}, page=${categoryPage.number - 1})}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a>
+                                            </li>
+                                            <li class="paginate_button" th:each="i : ${#numbers.sequence(1, categoryPage.totalPages)}" th:classappend="${categoryPage.number + 1 == i ? 'active' : ''}">
+                                                <a th:href="@{/admin/category(size=${categoryPage.size}, page=${i - 1})}" th:text="${i}" tabindex="0"></a>
+                                            </li>
+                                            <li class="paginate_button next" th:classappend="${categoryPage.hasNext() ? '' : 'disabled'}">
+                                                <a th:href="@{/admin/category(size=${categoryPage.size}, page=${categoryPage.number + 1})}" aria-controls="example1" data-dt-idx="0" tabindex="0">Next</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                         
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- jQuery 3 -->
+    <script th:src="@{/assets/js/jquery.min.js}"></script>
+    <script th:src="@{/assets/js/jquery-ui.js}"></script>
+    <script th:src="@{/assets/js/bootstrap.min.js}"></script>
+    <script th:src="@{/assets/js/adminlte.min.js}"></script>
+    <script th:src="@{/assets/js/dashboard.js}"></script>
+    <script th:src="@{/assets/tinymce/tinymce.min.js}"></script>
+    <script th:src="@{/assets/tinymce/config.js}"></script>
+    <script th:src="@{/assets/js/function.js}"></script>
+    <script>
+        $(document).ready(function() {
+            // Bấm vào nút "New" để hiển thị/ẩn form
+            $('#newCategoryButton').click(function() {
+                $('#addCategoryForm').toggle();
+            });
+        });
+    </script>
+    <style>
+        #addCategoryForm {
+            display: none;
+        }
+    </style>
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MovieHolic</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/assets/images/favicon.png}" />
+    <link type="text/css" rel="stylesheet" th:href="@{/assets/css/main.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+    <header th:fragment="header-guest">
+        <a href="/home" class="logo">
+            <img th:src="@{/assets/images/logo.png}" alt="Logo">
+        </a>
+        <form action="/search">
+            <div class="search-box">
+                <select name="category">
+                    <option value="1">Mystery</option>
+                    <option value="2">Sci-Fi</option>
+                    <option value="3">Crime</option>
+                    <option value="4">Sport</option>
+                    <option value="5">History</option>
+                    <option value="6">Romance</option>
+                    <option value="7">War</option>
+                    <option value="8">Fantasy</option>
+                    <option value="9">Comedy</option>
+                    <option value="10">Drama</option>
+                    <option value="11">Horror</option>
+                    <option value="12">Western</option>
+                    <option value="13">Adventure</option>
+                    <option value="14">Thriller</option>
+                    <option value="15">Film-Noir</option>
+                    <option value="16">Family</option>
+                    <option value="17">Animation</option>
+                    <option value="18">Musical</option>
+                    <option value="19">Documentary</option>
+                    <option value="20">Action</option>
+                    <option value="21">Music</option>
+                    <option value="22">Biography</option>
+                    <option value="-1" selected>All Categories</option>
+                </select>
+                <input onkeyup="fetchSuggestions()" type="search" name="keyword" placeholder="Search...">
+                <button class="btn primary-background text-white">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </form>
+        <div class="header">
+            <a th:href="@{/home}">Home</a>
+            <a th:href="@{/rcm}" style="color: white;">Movie Picker</a>
+            <a th:href="@{/categories}" style="color: white;">Category</a>
+            <a th:href="@{/hot}" style="color: white;">Hot</a>
+
+            <!-- Hiển thị mục Favorites khi người dùng đã đăng nhập -->
+            <a th:if="${session.loggedUser != null}" th:href="@{/favorites}" style="color: white;">Favorite</a>
+        </div>
+        <!-- Hiển thị nút Login nếu người dùng chưa đăng nhập -->
+        <button th:if="${session.loggedUser == null}" class="login-button" style="margin-left: auto;"
+            onclick="window.location.href='login'">Login</button>
+        <!-- Hiển thị avatar nếu người dùng đã đăng nhập -->
+        <img th:if="${session.loggedUser != null}" th:src="${session.avatar}" alt="Avatar" class="user-avatar"
+            onclick="window.location.href='/user'">
+        <button th:if="${session.loggedUser != null}" class="login-button" style="margin-left: auto;"
+            onclick="document.getElementById('logoutForm').submit();">Logout</button>
+        <form id="logoutForm" th:action="@{/logout}" method="post" style="display: none;"></form>
+
+        <style>
+            .header {
+                color: white;
+                font-family: Wendy One;
+                font-size: 20px;
+                margin-right: 20px;
+            }
+
+            .header a {
+                text-decoration: none;
+                margin-right: 20px;
+                color: white;
+            }
+
+            select {
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                background-image: none;
+                border: none;
+                outline: none;
+                font-size: 10px;
+                padding: 2px;
+                border-radius: 5px;
+                background-color: #333;
+                color: #fff;
+                font-family: Wendy One;
+                cursor: pointer;
+                overflow: hidden;
+            }
+
+            select::-webkit-scrollbar {
+                display: none;
+            }
+
+            select:after {
+                content: "\25BC";
+                font-size: 12px;
+                position: absolute;
+                top: 50%;
+                right: 10px;
+                transform: translateY(-50%);
+                pointer-events: none;
+                color: #fff;
+            }
+
+            select option {
+                background-color: #333;
+                color: #fff;
+            }
+
+            select:hover {
+                background-color: #444;
+            }
+
+            select:focus {
+                background-color: #333;
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            }
+
+            .search-box {
+                display: flex;
+                align-items: center;
+                background-color: #595959;
+                border-radius: 20px;
+                padding: 5px 10px;
+                margin-right: 10px;
+            }
+
+            .search-box input[type="search"] {
+                background-color: #595959;
+                border: none;
+                outline: none;
+                padding: 5px;
+            }
+
+            .search-box input::placeholder {
+                color: rgb(172, 172, 172);
+                font-family: "", sans-serif
+            }
+
+            .user-avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-left: 200px;
+            }
+        </style>
+    </header>
+</body>
+
+</html>

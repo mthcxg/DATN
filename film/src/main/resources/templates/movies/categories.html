@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{admin/fragments/head :: head}"></head>
+<link type="text/css" rel="stylesheet" th:href="@{/assets/css/user.css}" />
+<link type="text/css" rel="stylesheet" th:href="@{/assets/css/auth.css}" />
+<link href='https://fonts.googleapis.com/css?family=Wendy One' rel='stylesheet'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+<div th:replace="user/fragments/header-guest :: header-guest"></div>
+
+<head>
+	<style>
+		.category-container {
+			display: grid;
+			grid-template-columns: repeat(5, 1fr);
+			grid-gap: 20px;
+			background-color: #333;
+			padding: 20px;
+			border-radius: 10px;
+		}
+
+		.category-container a {
+			background-color: #333;
+			color: #fff;
+			font-family:Wendy One;
+			font-size: 20px;
+			text-decoration: none;
+			padding: 10px 15px;
+			border-radius: 5px;
+			text-align: center;
+			transition: background-color 0.3s ease;
+		}
+
+		.category-container a:hover {
+			background-color: #555;
+		}
+	</style>
+</head>
+
+<body style="background-color: #212121;">
+	<div class="content-container">
+		<h1 style="font-family: 'Wendy One', sans-serif;color: #ffffff; font-size: 50px;">Choose your favorite category
+		</h1>
+		<div class="category-container">
+			<a href="/categories/1/movies">Mystery</a>
+			<a href="/categories/2/movies">Sci-Fi</a>
+			<a href="/categories/3/movies">Crime</a>
+			<a href="/categories/4/movies">Sport</a>
+			<a href="/categories/5/movies">History</a>
+			<a href="/categories/6/movies">Romance</a>
+			<a href="/categories/7/movies">War</a>
+			<a href="/categories/8/movies">Fantasy</a>
+			<a href="/categories/9/movies">Comedy</a>
+			<a href="/categories/10/movies">Drama</a>
+			<a href="/categories/11/movies">Horror</a>
+			<a href="/categories/12/movies">Western</a>
+			<a href="/categories/13/movies">Adventure</a>
+			<a href="/categories/14/movies">Thriller</a>
+			<a href="/categories/15/movies">Film-Noir</a>
+			<a href="/categories/16/movies">Family</a>
+			<a href="/categories/17/movies">Animation</a>
+			<a href="/categories/18/movies">Musical</a>
+			<a href="/categories/19/movies">Documentary</a>
+			<a href="/categories/20/movies">Action</a>
+			<a href="/categories/21/movies">Music</a>
+			<a href="/categories/22/movies">Biography</a>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{admin/fragments/head :: head}"></head>
+<link type="text/css" rel="stylesheet" th:href="@{/assets/css/user.css}" />
+<link type="text/css" rel="stylesheet" th:href="@{/assets/css/auth.css}" />
+<link href='https://fonts.googleapis.com/css?family=Wendy One' rel='stylesheet'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+<div th:replace="user/fragments/header-guest :: header-guest"></div>
+
+<head>
+	<style>
+		.feeling-buttons {
+			display: flex;
+			justify-content: center;
+			margin-top: 30px;
+			text-decoration: none;
+		}
+
+		.button {
+			background-color: #333;
+			color: white;
+			padding: 8px 15px;
+			border: none;
+			border-radius: 5px;
+			font-family: "Wendy One", sans-serif;
+			font-size: 15px;
+			text-decoration: none;
+			margin-top: 20px;
+			position: static;
+			margin-right: 20px;
+		}
+
+		.feeling-box:hover {
+			transform: scale(1.1);
+		}
+
+		.card {
+			border: none;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			height: 100%;
+			background-color: rgb(30, 30, 30);
+		}
+
+		.card-body {
+			padding: 1rem;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.fs-13 {
+			font-size: 13px;
+		}
+
+		.filter-container {
+			background-color: rgb(30, 30, 30);
+			padding: 10px;
+			border: 5px;
+			margin-top: 20px;
+			display: flex;
+			align-items: center;
+		}
+
+		.pagination {
+			margin-left: 20px;
+			text-align: right;
+			display: inline-block;
+		}
+
+		.pagination a {
+			color: black;
+			float: left;
+			padding: 8px 16px;
+			text-decoration: none;
+		}
+
+		.pagination li {
+			margin-right: 5px;
+		}
+
+		.pagination .current-page {
+			background-color: white;
+		}
+
+		.search-box {
+			display: flex;
+			align-items: center;
+			background-color: #595959;
+			border-radius: 20px;
+			padding: 5px 10px;
+			margin-right: 10px;
+		}
+
+		.search-box input[type="search"] {
+			background-color: #595959;
+			border: none;
+			outline: none;
+			padding: 5px;
+		}
+
+		.search-box input::placeholder {
+			color: rgb(172, 172, 172);
+			font-family: "Wendy One", sans-serif
+		}
+	</style>
+</head>
+
+<body style="background-color: #212121;">
+	<div class="content-container">
+		<div
+			style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
+			<h1 style="font-family: 'Wendy One', sans-serif; color: #ffffff; font-size: 50px;">What movies have you
+				liked recently?</h1>
+			<form action="/movie">
+				<div class="search-box">
+					<input type="search"
+						style="background-color: #595959;color: #ffffff;  padding: 12px 16px; border-radius: 6px; font-family: 'Wendy One', sans-serif; font-size: 18px;"
+						name="keyword" placeholder="Enter title...">
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

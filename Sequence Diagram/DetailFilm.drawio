@@ -1,0 +1,57 @@
+<mxfile host="Electron" modified="2024-06-07T20:10:49.575Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.5.1 Chrome/124.0.6367.207 Electron/30.0.6 Safari/537.36" etag="UzzjBHQhVkCmNKHKiZGa" version="24.5.1" type="device">
+  <diagram name="Page-1" id="SJEaQcE8XOCrScz6gxeP">
+    <mxGraphModel dx="794" dy="511" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="fjZHmP0Z5LTG8yU5nHPT-1" value="" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlBoundary;" vertex="1" parent="1">
+          <mxGeometry x="190" y="40" width="50" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="fjZHmP0Z5LTG8yU5nHPT-2" value="MovieForm" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="180" y="10" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fjZHmP0Z5LTG8yU5nHPT-3" value="" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlControl;" vertex="1" parent="1">
+          <mxGeometry x="360" y="40" width="40" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="fjZHmP0Z5LTG8yU5nHPT-7" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="fjZHmP0Z5LTG8yU5nHPT-3">
+          <mxGeometry x="15" y="90" width="10" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="fjZHmP0Z5LTG8yU5nHPT-4" value="MovieController" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="325" y="10" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fjZHmP0Z5LTG8yU5nHPT-5" value="MovieService" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="480" y="40" width="100" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="fjZHmP0Z5LTG8yU5nHPT-10" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="fjZHmP0Z5LTG8yU5nHPT-5">
+          <mxGeometry x="45" y="100" width="10" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="fjZHmP0Z5LTG8yU5nHPT-6" value="requestSeeDetailMovie()" style="html=1;verticalAlign=bottom;startArrow=oval;startFill=1;endArrow=block;startSize=8;curved=0;rounded=0;" edge="1" parent="1" target="fjZHmP0Z5LTG8yU5nHPT-1">
+          <mxGeometry width="60" relative="1" as="geometry">
+            <mxPoint x="90" y="120" as="sourcePoint" />
+            <mxPoint x="210" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fjZHmP0Z5LTG8yU5nHPT-8" value="show(movieId)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=5;" edge="1" target="fjZHmP0Z5LTG8yU5nHPT-7" parent="1" source="fjZHmP0Z5LTG8yU5nHPT-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="305" y="135" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fjZHmP0Z5LTG8yU5nHPT-9" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;" edge="1" source="fjZHmP0Z5LTG8yU5nHPT-7" parent="1" target="fjZHmP0Z5LTG8yU5nHPT-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="305" y="205" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fjZHmP0Z5LTG8yU5nHPT-11" value="getReferenceById(movieId)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=5;" edge="1" target="fjZHmP0Z5LTG8yU5nHPT-10" parent="1" source="fjZHmP0Z5LTG8yU5nHPT-7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="455" y="145" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fjZHmP0Z5LTG8yU5nHPT-12" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;" edge="1" source="fjZHmP0Z5LTG8yU5nHPT-10" parent="1" target="fjZHmP0Z5LTG8yU5nHPT-7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="455" y="215" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

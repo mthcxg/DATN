@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{admin/fragments/head :: head}"></head>
+<link type="text/css" rel="stylesheet" th:href="@{/assets/css/user.css}" />
+<link type="text/css" rel="stylesheet" th:href="@{/assets/css/auth.css}" />
+<link href='https://fonts.googleapis.com/css?family=Wendy One' rel='stylesheet'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+<div th:replace="user/fragments/header-guest :: header-guest"></div>
+<body th:style="'background-image:url(' + @{/assets/images/bg.png} + '); background-repeat: no-repeat, repeat; background-size: cover;'">
+	<div class = "content">
+		<h1 style="font-family: Wendy One">UNLIMITED MOVIES AND TV SHOWS</h1>
+		<h2 style="font-family: Wendy One">Having trouble choosing a movie to watch during meals?</h2>
+		<h2 style="font-family: Wendy One">Let me choose the movie for you!</h2>
+		 <button class="start-button" onclick="window.location.href='/rcm'">Start</button>
+		<h2 style="font-family: Wendy One">Or <a href="login" style="color: #FF3131; text-decoration: none;">log in</a> so we can suggest movies based on your favorite movie list right now</h2>
+	</div>
+</body>
+
+</html>
